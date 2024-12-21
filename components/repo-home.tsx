@@ -12,11 +12,11 @@ import {
 import { Badge } from "./ui/badge";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getRepoInfo, RepoInfo } from "../app/repo/page";
 import logger from "../lib/logger";
 import { useRouter, usePathname } from "next/navigation";
 import { ThemeToggle } from "./theme-toggle";
-
+import { getRepoInfo } from "../lib/methods";
+import { RepoInfo } from "../types/objects";
 export function RepoHome({
   owner,
   repo,

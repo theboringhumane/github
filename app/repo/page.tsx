@@ -32,36 +32,8 @@ import {
 } from "../../components/ui/select";
 import { useRouter } from "next/navigation";
 import { RepoHome } from "../../components/repo-home";
-
-export interface RepoInfo {
-  name: string;
-  description: string;
-  stars: number;
-  watchers: number;
-  forks: number;
-  defaultBranch: string;
-  branches: string[];
-  topics: string[];
-  license: string;
-  isPrivate: boolean;
-  updatedAt: string;
-  readme: string | null;
-}
-
-export async function getRepoInfo(url: string) {
-  const res = await fetch(`/api/github/repo?url=${encodeURIComponent(url)}`, {
-    method: "GET",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-
-  if (!res.ok) {
-    throw new Error("Failed to fetch repository info");
-  }
-
-  return res.json();
-}
+import { getRepoInfo } from "../../lib/methods";
+import { RepoInfo } from "../../types/objects";
 
 function RepoSkeleton() {
   return (
@@ -146,16 +118,6 @@ function RepoSkeleton() {
     </div>
   );
 }
-
-const tabs = [
-  { name: "Code", icon: Code, href: "/repo" },
-  { name: "Issues", icon: CircleDot, href: "/issues" },
-  { name: "Pull Requests", icon: GitPullRequest, href: "/pulls" },
-  { name: "Branches", icon: GitBranch, href: "/branches" },
-  //   { name: "Actions", icon: Play, href: "/actions" },
-  //   { name: "Security", icon: Shield, href: "/security" },
-  //   { name: "Insights", icon: Inbox, href: "/insights" },
-];
 
 export default function RepoPage({
   searchParams,
