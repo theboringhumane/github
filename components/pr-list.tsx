@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import { Navbar } from "./navbar";
 import { Skeleton } from "./ui/skeleton";
 import { AnimatedShinyText } from "./ui/animated-tag";
+import { PR } from "../types/objects";
 
 async function getPRs(url: string) {
   const res = await fetch(`/api/github?url=${encodeURIComponent(url)}`, {
@@ -21,35 +22,6 @@ async function getPRs(url: string) {
   }
 
   return res.json();
-}
-
-export interface PR {
-  body: string;
-  number: number;
-  title: string;
-  author: { login: string; avatar_url: string };
-  createdAt: string;
-  updatedAt: string;
-  state: string;
-  labels: string[];
-  comments: Array<{
-    user: { login: string; avatar_url: string };
-    created_at: string;
-    body: string;
-  }>;
-  files: Array<{
-    filename: string;
-    status: string;
-    additions: number;
-    deletions: number;
-  }>;
-  reviewComments: Array<{
-    user: { login: string; avatar_url: string };
-    created_at: string;
-    position: number;
-    path: string;
-    body: string;
-  }>;
 }
 
 function PRListSkeleton() {
