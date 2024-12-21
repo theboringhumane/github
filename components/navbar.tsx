@@ -5,7 +5,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "./ui/select";
-import { PR } from "./pr-list";
+import { PR } from "../types/objects";
 
 export function Navbar({
   prs,
