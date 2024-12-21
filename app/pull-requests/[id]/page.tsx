@@ -7,12 +7,12 @@ import { Badge } from "../../../components/ui/badge";
 import { Card } from "../../../components/ui/card";
 import { Separator } from "../../../components/ui/separator";
 import { Button } from "../../../components/ui/button";
-import { PR } from "../../../components/pr-list";
 import { Skeleton } from "../../../components/ui/skeleton";
 import { AnimatedShinyText } from "../../../components/ui/animated-tag";
 import remarkFrontmatter from "remark-frontmatter";
 import { RepoHome } from "../../../components/repo-home";
 import { useRouter } from "next/navigation";
+import { PR } from "../../../types/objects";
 async function getPRDetails(url: string, prNumber: string) {
   const res = await fetch(
     `/api/github/pr?url=${encodeURIComponent(url)}&pr=${prNumber}`,
