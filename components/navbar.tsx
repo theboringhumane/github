@@ -1,5 +1,3 @@
-import { ThemeToggle } from "./theme-toggle";
-import { CheckCircle, GitPullRequest } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -8,7 +6,6 @@ import {
   SelectValue,
 } from "./ui/select";
 import { PR } from "./pr-list";
-import { AnimatedShinyText } from "./ui/animated-tag";
 
 export function Navbar({
   prs,
@@ -24,23 +21,7 @@ export function Navbar({
 
   return (
     <div className="border-b border-muted">
-      <div className="container mx-auto flex h-16 items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="bg-muted rounded-full">
-            <AnimatedShinyText className="px-2 py-1">{repo}</AnimatedShinyText>
-          </div>
-          <div className="flex items-center gap-2">
-            <GitPullRequest className="h-5 w-5" />
-            <span className="text-sm">
-              {prs.filter((pr) => pr.state === "open").length} Open
-            </span>
-            <CheckCircle className="h-5 w-5" />
-            <span className="text-sm">
-              {prs.filter((pr) => pr.state === "closed").length} Closed
-            </span>
-          </div>
-        </div>
-
+      <div className="w-full flex h-16 items-center justify-between">
         <div className="flex items-center gap-4">
           {["State", "Label"].map((filter) => (
             <Select
@@ -78,7 +59,6 @@ export function Navbar({
               <SelectItem value="recently-updated">Recently Updated</SelectItem>
             </SelectContent>
           </Select>
-          <ThemeToggle />
         </div>
       </div>
     </div>

@@ -54,7 +54,7 @@ export interface PR {
 
 function PRListSkeleton() {
   return (
-    <div className="rounded-lg border border-muted bg-card">
+    <div className="rounded-lg mt-4 mx-auto container border border-muted bg-card">
       {[...Array(5)].map((_, i) => (
         <div
           key={i}
@@ -135,7 +135,7 @@ export function PRList({ searchParams }: { searchParams: { url?: string } }) {
   }
 
   return (
-    <>
+    <div className="mx-auto container">
       <Navbar
         prs={prs}
         repo={url.replace("https://github.com/", "")}
@@ -152,7 +152,7 @@ export function PRList({ searchParams }: { searchParams: { url?: string } }) {
               <div className="flex items-start justify-between">
                 <div>
                   <Link
-                    href={`/pr/${pr.number}?url=${encodeURIComponent(url)}`}
+                    href={`/pull-requests/${pr.number}?url=${encodeURIComponent(url)}`}
                     className="text-lg flex items-center gap-2 font-semibold hover:text-primary"
                   >
                     <GitPullRequest className={
@@ -208,6 +208,6 @@ export function PRList({ searchParams }: { searchParams: { url?: string } }) {
           </div>
         ))}
       </div>
-    </>
+    </div>
   );
 }
