@@ -1,0 +1,64 @@
+name: CoriAI ✨ Code Review
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches: ['*']
+
+jobs:
+  code-review:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      
+      - name: Cori Auth Step
+        id: generate-token
+        uses: actions/create-github-app-token@v1
+        with:
+          app-id: ${{ secrets.CORI_APP_ID }}
+          private-key: ${{ secrets.CORI_APP_PRIVATE_KEY }}
+      
+      - name: CoriAI ✨ Code Review
+        uses: theboringhumane/cori-ai@1.2.9
+        with:
+          provider: "openai"
+          model: gpt-4o-mini
+          github_token: ${{ steps.generate-token.outputs.token }}
+          openai_api_key: ${{ secrets.OPENAI_API_KEY }}
+          openai_base_url: ${{ secrets.OPENAI_BASE_URL }}
+          extra_prompt: |
+            This is a modern GitHub clone built with Next.js 15, React, and Tailwind CSS. The application features:
+
+            Core Features:
+            - Next.js 15 App Router architecture
+            - TypeScript for type safety
+            - Tailwind CSS for styling
+            - shadcn/ui component library
+            - GitHub REST API integration
+            - React Hooks for state management
+            - Markdown rendering with react-markdown and remark-gfm
+
+            Key Features:
+            - Repository Overview: File tree explorer, README rendering, stats and metadata
+            - Code Management: Branch selection, commit history with emoji support
+            - Pull Requests & Issues: Status indicators, labels, discussions
+            - Modern UI/UX: Dark mode, responsive design, loading skeletons
+
+            Project Structure:
+            - app/: Next.js 15 pages and API routes
+            - components/: React components (UI and features)
+            - lib/: Utility functions
+            - public/: Static assets
+
+            Please review for:
+            - React/Next.js best practices
+            - TypeScript type safety
+            - Component architecture
+            - State management patterns
+            - API integration
+            - Performance optimization
+            - UI/UX considerations
+            - Code maintainability
