@@ -1,6 +1,6 @@
-# GitHub Repository Explorer 🚀
+# GitHub but in nextjs
 
-A modern, feature-rich GitHub repository explorer built with Next.js 13, React, and Tailwind CSS. View repositories, pull requests, issues, commits, and more with a beautiful, responsive interface.
+A modern, feature-rich GitHub built with Next.js 13, React, and Tailwind CSS. View repositories, pull requests, issues, commits, and more with a beautiful, responsive interface.
 
 ## ✨ Features
 
@@ -63,13 +63,14 @@ npm run dev
 
 5. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-## 🔑 Environment Variables
+## 🔑 Environment Variables (optional) 
+> Needed only for private repositories
 
-- \`GITHUB_TOKEN\`: GitHub Personal Access Token with repo scope
+- `GITHUB_TOKEN`: GitHub Personal Access Token with repo scope
 
 ## 📦 Project Structure
 
-\`\`\`
+```
 ├── app/                    # Next.js 13 app directory
 │   ├── api/               # API routes
 │   ├── repo/              # Repository pages
@@ -81,7 +82,7 @@ npm run dev
 │   └── ...               # Feature components
 ├── lib/                   # Utility functions
 └── public/               # Static assets
-\`\`\`
+```
 
 ## 🎨 Features in Detail
 
