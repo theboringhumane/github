@@ -70,54 +70,54 @@ export function RepoHome({
   return (
     <div className="bg-background min-h-screen">
       <div className="border-b border-muted">
-        <div className="container mx-auto py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-2 text-muted-foreground">
+        <div className="container mx-auto py-4 px-4 lg:px-6">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="flex items-center gap-2 text-muted-foreground flex-wrap">
               <GitBranch className="h-4 w-4" />
               <Link
                 href={`https://github.com/${owner}`}
-                className="hover:text-foreground hover:underline"
+                className="hover:text-foreground hover:underline transition-colors"
               >
                 {owner}
               </Link>
               <span>/</span>
               <Link
                 href={url}
-                className="font-semibold text-foreground hover:underline"
+                className="font-semibold text-foreground hover:underline transition-colors"
               >
                 {repo}
               </Link>
               {repoInfo?.isPrivate && (
-                <Badge variant="secondary">Private</Badge>
+                <Badge variant="secondary" className="animate-in fade-in">Private</Badge>
               )}
             </div>
 
             <ThemeToggle />
           </div>
 
-          <div className="mt-4 flex items-center gap-4">
-            <button className="inline-flex items-center gap-2 rounded-md bg-muted px-3 py-1 hover:bg-muted/80">
+          <div className="mt-4 flex flex-wrap items-center gap-2 sm:gap-4">
+            <button className="inline-flex items-center gap-2 rounded-md bg-muted px-3 py-1.5 hover:bg-muted/80 transition-colors">
               <Star className="h-4 w-4" />
-              Star
-              <Badge variant="secondary">{repoInfo?.stars}</Badge>
+              <span className="hidden sm:inline">Star</span>
+              <Badge variant="secondary" className="ml-1">{repoInfo?.stars || 0}</Badge>
             </button>
-            <button className="inline-flex items-center gap-2 rounded-md bg-muted px-3 py-1 hover:bg-muted/80">
+            <button className="inline-flex items-center gap-2 rounded-md bg-muted px-3 py-1.5 hover:bg-muted/80 transition-colors">
               <Eye className="h-4 w-4" />
-              Watch
-              <Badge variant="secondary">{repoInfo?.watchers}</Badge>
+              <span className="hidden sm:inline">Watch</span>
+              <Badge variant="secondary" className="ml-1">{repoInfo?.watchers || 0}</Badge>
             </button>
-            <button className="inline-flex items-center gap-2 rounded-md bg-muted px-3 py-1 hover:bg-muted/80">
+            <button className="inline-flex items-center gap-2 rounded-md bg-muted px-3 py-1.5 hover:bg-muted/80 transition-colors">
               <GitFork className="h-4 w-4" />
-              Fork
-              <Badge variant="secondary">{repoInfo?.forks}</Badge>
+              <span className="hidden sm:inline">Fork</span>
+              <Badge variant="secondary" className="ml-1">{repoInfo?.forks || 0}</Badge>
             </button>
           </div>
         </div>
       </div>
 
-      <div className="border-b border-muted">
+      <div className="border-b border-muted overflow-x-auto">
         <div className="container mx-auto">
-          <nav className="flex">
+          <nav className="flex min-w-max">
             {tabs.map((tab) => {
               const Icon = tab.icon;
               const isActive = tab.href === currentPath;
@@ -125,21 +125,25 @@ export function RepoHome({
                 <Link
                   key={tab.name}
                   href={`${tab.href}?url=${encodeURIComponent(url)}`}
-                  className={`flex items-center gap-2 border-b-2 border-muted px-4 py-3 hover:bg-muted/50 ${
+                  className={`flex items-center gap-2 border-b-2 px-4 py-3 transition-colors hover:bg-muted/50 ${
                     isActive
-                      ? "border-primary text-foreground"
+                      ? "border-primary text-foreground font-medium"
                       : "border-transparent text-muted-foreground"
                   }`}
                 >
                   <Icon className="h-4 w-4" />
-                  {tab.name}
+                  <span className="hidden sm:inline">{tab.name}</span>
+                  <span className="sm:hidden">{tab.name.slice(0, 1)}</span>
                 </Link>
               );
             })}
           </nav>
         </div>
       </div>
-      {children}
+      
+      <div className="container mx-auto px-4 lg:px-6">
+        {children}
+      </div>
     </div>
   );
 }
